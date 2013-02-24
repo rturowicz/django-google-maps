@@ -1,19 +1,21 @@
 
-from django.conf import settings
 from django.forms import widgets
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.forms.util import flatatt
 
+from .settings import GOOGLE_MAPS_CSS_URL, GOOGLE_MAPS_JS_URL, GOOGLE_MAPS_JQUERY_URL
+
+
 class GoogleMapsAddressWidget(widgets.TextInput):
     "a widget that will place a google map right after the #id_address field"
     
     class Media:
-        css = {'all': (settings.STATIC_URL + 'django_google_maps/css/google-maps-admin.css',),}
+        css = {'all': (GOOGLE_MAPS_CSS_URL + '/google-maps-admin.css',),}
         js = (
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js',
+            GOOGLE_MAPS_JQUERY_URL + '/jquery.min.js',
             'http://maps.google.com/maps/api/js?sensor=false',
-            settings.STATIC_URL + 'django_google_maps/js/google-maps-admin.js',
+            GOOGLE_MAPS_JS_URL + '/google-maps-admin.js',
         )
 
     def render(self, name, value, attrs=None):

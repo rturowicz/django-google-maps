@@ -35,7 +35,11 @@ USAGE:
 That should be all you need to get started. If you're not using Django 1.3
 make sure that the static media is in a location that will be found and
 properly served. The assumed location is `settings.STATIC_URL + 'django_google_maps/js/google-maps-admin.js',`
-  
+Alternatively you can set css and js urls in settings using:
+- GOOGLE_MAPS_JS_URL
+- GOOGLE_MAPS_CSS_URL
+- GOOGLE_MAPS_JQUERY_URL
+
 I also like to make the geolocation field readonly in the admin so a user
 (myself) doesn't accidentally change it to a nonsensical value. There is
 validation on the field so you can't enter an incorrect value, but you could
