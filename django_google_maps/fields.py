@@ -21,6 +21,7 @@ from django.core import exceptions
 
 __all__ = ('AddressField', 'GeoLocationField')
 
+
 def typename(obj):
     """Returns the type of obj as a string. More descriptive and specific than
     type(obj), and safe for any object, unlike __class__."""
@@ -28,6 +29,7 @@ def typename(obj):
         return getattr(obj, '__class__').__name__
     else:
         return type(obj).__name__
+
 
 class GeoPt(object):
     """A geographical point."""
@@ -71,23 +73,26 @@ class GeoPt(object):
         except (AttributeError, ValueError):
             raise exceptions.ValidationError(
                 'Expected a "lat,long" formatted string; received %s (a %s).' %
-            (geo_point, typename(geo_point)))
+                (geo_point, typename(geo_point))
+            )
 
     def _validate_geo_range(self, geo_part, range_val):
         try:
             geo_part = float(geo_part)
             if abs(geo_part) > range_val:
                 raise exceptions.ValidationError(
-                'Must be between -%s and %s; received %s' % (range_val, range_val, geo_part)
-            )
+                    'Must be between -%s and %s; received %s' % (range_val, range_val, geo_part)
+                )
         except (TypeError, ValueError):
             raise exceptions.ValidationError(
                 'Expected float, received %s (a %s).' % (geo_part, typename(geo_part))
             )
         return geo_part
 
+
 class AddressField(models.CharField):
     pass
+
 
 class GeoLocationField(models.CharField):
     """
