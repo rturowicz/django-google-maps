@@ -1,0 +1,7 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        var googlemap = googleMapClient();
+        googlemap.initialize({{ lat|safe }}, {{ lng|safe }}, {{ zoom }}, '{{ canvas }}');
+    });
+</script>
+<div class="map_canvas_wrapper" style="width: {{ width }}px; height: {{ height }}px;"><div id="{{ canvas }}" class="map_canvas"></div></div>
